@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, String
@@ -14,5 +16,5 @@ class Customer(Base):
     email: Mapped[str] = mapped_column(String(30))
 
     address_id: Mapped[int] = mapped_column(ForeignKey("customer_addresses.id"), nullable=False)
-    customer_address: Mapped["CustomerAddress"] = relationship(back_populates="customers")
+    customer_address: Mapped["CustomerAddress"] = relationship(back_populates="customer")
     orders: Mapped[list["Order"]] = relationship(back_populates="customer")

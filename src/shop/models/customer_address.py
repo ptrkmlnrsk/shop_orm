@@ -10,4 +10,4 @@ class CustomerAddress(Base):
     city: Mapped[str]
     postal_code: Mapped[str]
 
-    customers: Mapped[list["Customer"]] = relationship(back_populates="customer_address")
+    customer: Mapped["Customer"] = relationship(back_populates="customer_address")

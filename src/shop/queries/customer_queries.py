@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from src.shop.models.order import Order
-from src.shop.models.product import Product
+from src.shop.models.customer import Customer
 
-def
+def customer_by_name(first_name: str):
+    return sa.select(Customer).where(Customer.first_name.ilike(f"%{first_name}"))
