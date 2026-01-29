@@ -18,6 +18,6 @@ class Customer(Base):
     phone_number: Mapped[str]
     email: Mapped[str] = mapped_column(String(30))
 
-    address_id: Mapped[int] = mapped_column(ForeignKey("customer_addresses.id"), unique=True, nullable=False)
+    address_id: Mapped[int] = mapped_column(ForeignKey("customer_addresses.address_id"), unique=True, nullable=False)
     customer_address: Mapped["CustomerAddress"] = relationship(back_populates="customer")
     orders: Mapped[list["Order"]] = relationship(back_populates="customer")

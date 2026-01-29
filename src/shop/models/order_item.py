@@ -10,11 +10,11 @@ if TYPE_CHECKING:
 class OrderItem(Base):
     __tablename__ = "order_items"
 
-    id: Mapped[int] = mapped_column(primary_key=True, unique=True)
+    order_item_id: Mapped[int] = mapped_column(primary_key=True, unique=True)
     quantity: Mapped[int]
-    order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), nullable=False)
-    discount_id: Mapped[int] = mapped_column(ForeignKey("product_discounts.id"), nullable=False)
-    product_id: Mapped[int] = mapped_column(ForeignKey("products.id"), nullable=False)
+    order_id: Mapped[int] = mapped_column(ForeignKey("orders.order_id"), nullable=False)
+    discount_id: Mapped[int] = mapped_column(ForeignKey("product_discounts.discount_id"), nullable=False)
+    product_id: Mapped[int] = mapped_column(ForeignKey("products.product_id"), nullable=False)
 
     order: Mapped[list["Order"]] = relationship(back_populates="order_item")
     product: Mapped["Product"] = relationship(back_populates="order_item_id")

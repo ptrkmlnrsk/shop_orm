@@ -11,10 +11,10 @@ if TYPE_CHECKING:
 class ProductInventory(Base):
     __tablename__ = "product_inventories"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
+    inventory_id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
     quantity: Mapped[int]
-    product_id: Mapped[int] = mapped_column(ForeignKey("products.id"))
-    store_id: Mapped[int] = mapped_column(ForeignKey("stores.id"))
+    product_id: Mapped[int] = mapped_column(ForeignKey("products.product_id"))
+    store_id: Mapped[int] = mapped_column(ForeignKey("stores.store_id"))
 
     product: Mapped["Product"] = relationship(back_populates="product_inventories")
     store: Mapped["Store"] = relationship(back_populates="product_inventories")

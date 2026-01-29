@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 class Store(Base):
     __tablename__ = "stores"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
+    store_id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
     store_name: Mapped[str]
     country: Mapped[str]
     city: Mapped[str]
@@ -19,5 +19,5 @@ class Store(Base):
     postal_code: Mapped[str]
     store_size: Mapped[int]
 
-    orders: Mapped[list["Order"]] = relationship(back_populates="store") # jesli po jednej stronie mam liste zamowien to po drugiej mam jeden sklep
+    orders: Mapped[list["Order"]] = relationship(back_populates="store")
     product_inventories: Mapped[list["ProductInventory"]] = relationship(back_populates="store")

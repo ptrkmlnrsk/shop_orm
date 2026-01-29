@@ -4,3 +4,4 @@ from .store import Store
 from .product import Product
 from .product_inventory import ProductInventory
 from .employee import Employee
+from .customer_address import CustomerAddress

@@ -8,7 +8,7 @@ if TYPE_CHECKING:
 class CustomerAddress(Base):
     __tablename__ = "customer_addresses"
 
-    id: Mapped[int] = mapped_column(primary_key=True, unique=True)
+    address_id: Mapped[int] = mapped_column(primary_key=True, unique=True)
     country: Mapped[str]
     city: Mapped[str]
     postal_code: Mapped[str]

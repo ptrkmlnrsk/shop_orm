@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class Employee(Base):
     __tablename__ = "employees"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
+    employee_id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
     first_name: Mapped[str]
     last_name: Mapped[str]
     phone_number: Mapped[str]

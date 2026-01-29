@@ -16,14 +16,14 @@ if TYPE_CHECKING:
 class Order(Base):
     __tablename__ = "orders"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
+    order_id: Mapped[int] = mapped_column(primary_key=True, index=True, unique=True)
     order_status: Mapped[int]
     order_date: Mapped[datetime.datetime]
     shipped_date: Mapped[datetime.datetime]
 
-    store_id: Mapped[int] = mapped_column(ForeignKey("stores.id"), nullable=False)
-    employee_id: Mapped[int] = mapped_column(ForeignKey("employees.id"), nullable=False)
-    customer_id: Mapped[int] = mapped_column(ForeignKey("customers.id"), nullable=False)
+    store_id: Mapped[int] = mapped_column(ForeignKey("stores.store_id"), nullable=False)
+    employee_id: Mapped[int] = mapped_column(ForeignKey("employees.employee_id"), nullable=False)
+    customer_id: Mapped[int] = mapped_column(ForeignKey("customers.customer_id"), nullable=False)
 
     store: Mapped["Store"] = relationship(back_populates="orders")
     employee: Mapped["Employee"] = relationship(back_populates="orders")
