@@ -8,7 +8,9 @@ connection_url = sa.engine.URL.create(
     database="master",
     query={"driver": "ODBC Driver 18 for SQL Server", "Encrypt": "no"}
 )
+print(DATABASE_URL)
+print(connection_url)
 
 engine = sa.create_engine(
-    connection_url,
+    DATABASE_URL,
     echo=True)

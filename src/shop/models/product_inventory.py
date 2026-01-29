@@ -1,8 +1,12 @@
+from typing import TYPE_CHECKING
+
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
-from src.shop.models.store import Store
-from src.shop.models.product import Product
+
+if TYPE_CHECKING:
+    from src.shop.models.product import Product
+    from src.shop.models.store import Store
 
 class ProductInventory(Base):
     __tablename__ = "product_inventories"

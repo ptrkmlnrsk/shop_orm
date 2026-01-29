@@ -1,12 +1,16 @@
 import datetime
 
+from typing import TYPE_CHECKING
+
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
-from src.shop.models.store import Store
-from src.shop.models.employee import Employee
-from src.shop.models.customer import Customer
-from src.shop.models.order_item import OrderItem
+
+if TYPE_CHECKING:
+    from src.shop.models.employee import Employee
+    from src.shop.models.order_item import OrderItem
+    from src.shop.models.store import Store
+    from src.shop.models.customer import Customer
 
 
 class Order(Base):

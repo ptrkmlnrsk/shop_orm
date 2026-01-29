@@ -1,8 +1,11 @@
+from typing import TYPE_CHECKING
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey
-from src.shop.models.order import Order
-from src.shop.models.product import Product
+
+if TYPE_CHECKING:
+    from src.shop.models.product import Product
+    from src.shop.models.order import Order
 
 class OrderItem(Base):
     __tablename__ = "order_items"

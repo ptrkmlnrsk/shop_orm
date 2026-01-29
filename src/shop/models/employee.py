@@ -1,9 +1,10 @@
 import datetime
-
+from typing import TYPE_CHECKING
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from src.shop.models.order import Order
 
+if TYPE_CHECKING:
+    from src.shop.models.order import Order
 
 class Employee(Base):
     __tablename__ = "employees"

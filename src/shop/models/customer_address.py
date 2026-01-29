@@ -1,6 +1,9 @@
+from typing import TYPE_CHECKING
+
 from src.shop.db.base import Base
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from src.shop.models.customer import Customer
+if TYPE_CHECKING:
+    from src.shop.models.customer import Customer
 
 class CustomerAddress(Base):
     __tablename__ = "customer_addresses"
@@ -10,4 +13,4 @@ class CustomerAddress(Base):
     city: Mapped[str]
     postal_code: Mapped[str]
 
-    customer: Mapped["Customer"] = relationship(back_populates="customer_address")
+    customer: Mapped["Customer"] = relationship(back_populates="customer_address", uselist=False)
