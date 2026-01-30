@@ -21,3 +21,13 @@ class Customer(Base):
     address_id: Mapped[int] = mapped_column(ForeignKey("customer_addresses.address_id"), unique=True, nullable=False)
     customer_address: Mapped["CustomerAddress"] = relationship(back_populates="customer")
     orders: Mapped[list["Order"]] = relationship(back_populates="customer")
+
+    def __repr__(self) -> str:
+        return(
+            f"Customer("
+            f"customer_id={self.customer_id}, "
+            f"first_name={self.first_name}, "
+            f"last_name={self.last_name}, "
+            f"phone_number={self.phone_number}, "
+            f"email={self.email}, "
+        )

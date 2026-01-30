@@ -220,5 +220,12 @@ todo.md
 /files/
 /sqlite_dbs/
 
-# db files
+# Commit configs
+.yaml
+.yml
+
+# DB files
 .db
+
+# Folders
+/dump/

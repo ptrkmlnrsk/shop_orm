@@ -1,11 +1,16 @@
 from typing import TYPE_CHECKING
 from src.shop.db.session import Session
+from src.shop.scripts.file_handler import FileHandler
 
-from src.shop.queries.customer_queries import customer_by_name
+from src.shop.queries.customer_queries import customer_by_name, customers_and_their_addresses
 
 with Session() as session:
     stmt = customer_by_name('William')
-    rows = session.scalars(stmt).one()
-    print(rows)
-    for r in rows:
-        print(r.customer_id, r.first_name, r.last_name, r.phone_number, r.email)
+    customers = session.scalars(stmt).all()
+
+    rows = session.execute(customers_and_their_addresses()).all()
+
+data = [dict(row._mapping) for row in rows]
+
+file_handler = FileHandler()
+file_handler.write_file(data, './dump/exported_customer_data.json')
