@@ -11,6 +11,7 @@ class CustomerAddress(Base):
     address_id: Mapped[int] = mapped_column(primary_key=True, unique=True)
     country: Mapped[str]
     city: Mapped[str]
+    street: Mapped[str]
     postal_code: Mapped[str]
 
     customer: Mapped["Customer"] = relationship(back_populates="customer_address", uselist=False)
