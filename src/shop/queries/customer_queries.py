@@ -3,6 +3,9 @@ from src.shop.models.customer import Customer
 from src.shop.models.customer_address import CustomerAddress
 from src.shop.models.store import Store
 from src.shop.models.employee import Employee
+from src.shop.models.product import Product
+from src.shop.models.order_item import OrderItem
+from src.shop.models.product_discount import ProductDiscount
 from sqlalchemy.sql import Select
 from sqlalchemy import func
 
@@ -58,7 +61,32 @@ def check_if_employee_is_employed_and_how_long() -> Select:
         )
     )
 
+def find_product_names_longer_than_50_characters() -> Select:
+    return (
+        sa.select(Product.product_name).where(func.length(Product.product_name) > 50)
+    )
 
+def calculate_ratio_discounted_to_non_discounted_products():
+
+    # orders_with_discount_info =
+    subq = (
+        sa.select(
+            OrderItem.order_item_id.label("order_item_id"),
+            ProductDiscount.active.label("active_discount")
+            )
+        .select_from(OrderItem)
+        .join(ProductDiscount, OrderItem.discount_id == ProductDiscount.discount_id)
+        .subquery("oi_discounts")
+        )
+
+
+    return     (
+        sa.select(
+            func.sum(sa.case((subq.c.active_discount == True, 1), else_=0)).label("discounted"),
+            func.sum(sa.case((subq.c.active_discount == False, 1), else_=0)).label("non_discounted")
+        )
+        .select_from(subq)
+    )
 
 
 
