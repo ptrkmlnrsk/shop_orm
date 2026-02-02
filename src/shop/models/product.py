@@ -13,6 +13,7 @@ class Product(Base):
     product_name: Mapped[str]
     brand: Mapped[str]
     category_id: Mapped[int] = mapped_column(ForeignKey("categories.category_id"), nullable=False)
+    current_price: Mapped[float] = mapped_column()
 
     product_inventories: Mapped[list["ProductInventory"]] = relationship(
         back_populates="product")
