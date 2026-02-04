@@ -43,8 +43,6 @@ def calculate_min_max_customer_spent():
     )
     return (
         sa.select(
-            #func.max(subq.c.total_spent).label('max_spent'),
-            #func.min(subq.c.total_spent).label('min_spent')
             (func.max(subquery.c.total_spent) - func.min(subquery.c.total_spent)).label('difference_in_spent')
         ).select_from(subquery)
     )
