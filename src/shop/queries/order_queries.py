@@ -82,3 +82,4 @@ def avg_days_to_complete_order():
         .group_by(subquery.c.store_id)
         .order_by(subquery.c.store_id.asc())
     )
+
