@@ -8,6 +8,7 @@ from src.shop.models.customer_address import CustomerAddress
 from src.shop.models.product import Product
 from src.shop.models.order import Order
 from src.shop.models.order_item import OrderItem
+from src.shop.models.employee import Employee
 
 
 def customer_by_name(first_name: str) -> Select:
@@ -46,4 +47,28 @@ def calculate_min_max_customer_spent():
             (func.max(subquery.c.total_spent) - func.min(subquery.c.total_spent)).label('difference_in_spent')
         ).select_from(subquery)
     )
+
+def select_customer_who_is_worker():
+
+    subquery = (
+        sa.select(
+        func.concat(Customer.first_name, ' ', Customer.last_name)
+        )
+    )
+    return (
+        sa.select(
+            func.concat(Employee.first_name, ' ', Employee.last_name)
+                ).select_from(Employee)
+            .where(func.concat(Employee.first_name, ' ', Employee.last_name)
+            .in_(subquery)
+        )
+    )
+
+
+
+
+
+
+
+
 
