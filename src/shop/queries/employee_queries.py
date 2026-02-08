@@ -45,3 +45,11 @@ def find_customer_cities_without_stores() -> Select:
                 )
             )
         ).distinct()
+
+
+def show_all_employees_names():
+    return (
+        sa.select(
+            func.concat(Employee.first_name, ' ', Employee.last_name).label("full_name")
+        )
+    )

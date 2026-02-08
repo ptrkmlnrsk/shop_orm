@@ -9,7 +9,7 @@ class FileHandler:
             os.remove(output_file_path)
 
         try:
-            with open(output_file_path, 'w', encoding='cp1250') as file:
+            with open(output_file_path, 'w', encoding='utf-8') as file:
                 json.dump(data, file, indent=2, default=str)
             print('----- File written to ' + output_file_path + ' -----')
         except IOError as e:

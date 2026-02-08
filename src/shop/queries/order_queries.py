@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from sqlalchemy.sql import Select, func, or_
+from sqlalchemy.sql import Select, func, or_, text
 from src.shop.models.order import Order
 from src.shop.models.order_item import OrderItem
 from src.shop.models.employee import Employee
@@ -67,3 +67,18 @@ def count_total_sales_per_month():
             .group_by(sa.extract('month', Order.order_date).label('month_extract'))
             .order_by('month_extract')
         )
+
+
+def avg_days_to_complete_order():
+
+    subquery = sa.select(
+        Order.store_id,
+        func.datediff(text('day'), Order.order_date, Order.shipped_date).label('days_to_complete_order')
+    ).select_from(Order).subquery('days_for_order')
+
+    return (
+        sa.select(subquery.c.store_id,
+                  func.avg(subquery.c.days_to_complete_order))
+        .group_by(subquery.c.store_id)
+        .order_by(subquery.c.store_id.asc())
+    )
