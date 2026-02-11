@@ -21,8 +21,9 @@ def customers_and_their_addresses() -> Select:
             Customer.customer_id,
             Customer.first_name,
             Customer.last_name,
-            CustomerAddress.country,
-            CustomerAddress.city
+            CustomerAddress.street,
+            CustomerAddress.city,
+            CustomerAddress.country
         )
         .select_from(Customer)
         .join(Customer.customer_address)

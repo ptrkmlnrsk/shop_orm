@@ -18,7 +18,12 @@ QUERIES ={
     "avg_days_to_complete_order": lambda s: s.execute(avg_days_to_complete_order()).all(),
     "top10_percent_products": lambda s: s.execute(top10_percent_products()).all(),
     "sales_per_product_name_sales_per_category": lambda s: s.execute(sales_per_product_name_sales_per_category()).mappings().all(),
-    "show_all_employees_names": lambda s: s.execute(show_all_employees_names()).mappings().all()
+    "show_all_employees_names": lambda s: s.execute(show_all_employees_names()).mappings().all(),
+    "customers_and_their_addresses": lambda s: s.execute(customers_and_their_addresses()).mappings().all(),
+    "get_employee_and_sales_sum_in_2022_2023": lambda s: s.execute(get_employee_and_sales_sum_in_2022_2023()).mappings().all(),
+    "product_price_and_rank": lambda s: s.execute(product_price_and_rank()).mappings().all(),
+    "select_top_5_products_info": lambda s: s.execute(select_top_5_products_info()).mappings().all(),
+    "count_products_within_category": lambda s: s.execute(count_products_within_category()).mappings().all()
 }
 
 def run(query_name: str):
@@ -31,11 +36,11 @@ def run(query_name: str):
 if __name__ == "__main__":
     file_handler = FileHandler()
 
-    query_name = "show_all_employees_names"
+    query_and_filename = "count_products_within_category"
 
-    result = run(query_name)
+    result = run(query_and_filename)
     data = [dict(row) for row in result]
 
-    file_handler.write_file(data, f'./dump/{query_name}.json')
+    file_handler.write_file(data, f'./dump/{query_and_filename}.json')
 
 
